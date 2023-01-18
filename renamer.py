@@ -40,10 +40,10 @@ with open_function(args.barcodes) as barcodes:
 if args.chrom:
     bam = bam.fetch(args.chrom, int(args.start), int(args.end))
 
-#### editted with open(args.out,'w') as fastq: to:::::::::::: with gzip.open(args.out,'wt') as fastq:
+#### editted with open(args.out,'w') as fastq: to:::::::::::: with gzip.open(f'{args.out}.gz','wt') as fastq:
     
 recent_umis = {}
-with gzip.open(args.out,'wt') as fastq:
+with gzip.open(f'{args.out}.gz','wt') as fastq:
     for (index,read) in enumerate(bam):
         if not read.has_tag(CELL_TAG):
             continue
