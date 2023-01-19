@@ -223,7 +223,7 @@ def make_fastqs(args):
         time.sleep(0.5)
     with open(args.out_dir + "/fastqs.done", 'w') as done:
         for fastqs in region_fastqs:
-            done.write("\t".join(fastqs) + "\n")
+            done.write("\t".join(f'{fastqs}.gz') + "\n")
     return((region_fastqs, all_fastqs))
 
 def remap(args, region_fastqs, all_fastqs):
