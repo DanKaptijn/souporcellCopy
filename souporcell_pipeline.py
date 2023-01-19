@@ -562,8 +562,8 @@ if not args.skip_remap:
     else:
         all_fastqs = []
         region_fastqs = []
-        with gzip.open(f'{args.out_dir}.gz' + "/fastqs.done") as fastqs:
-            for line.decode() in fastqs:
+        with open(args.out_dir + "/fastqs.done") as fastqs:
+            for line in fastqs:
                 toks = line.strip().split("\t")
                 region_fastqs.append(toks)
                 for tok in toks:
