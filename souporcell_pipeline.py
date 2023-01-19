@@ -211,7 +211,7 @@ def make_fastqs(args):
                 chrom = region[sub_index][0]
                 start = region[sub_index][1]
                 end = region[sub_index][2]
-                fq_name = args.out_dir + "/souporcell_fastq_" + str(index) + "_" + str(sub_index) + ".fq"
+                fq_name = args.out_dir + "/souporcell_fastq_" + str(index) + "_" + str(sub_index) + ".fq" + ".gz" ### added ".gz" DK
                 directory = os.path.dirname(os.path.realpath(__file__))
                 p = subprocess.Popen([directory+"/renamer.py", "--bam", args.bam, "--barcodes", args.barcodes, "--out", fq_name,
                         "--chrom", chrom, "--start", str(start), "--end", str(end), "--no_umi", str(args.no_umi), 
@@ -223,7 +223,7 @@ def make_fastqs(args):
         time.sleep(0.5)
     with open(args.out_dir + "/fastqs.done", 'w') as done:
         for fastqs in region_fastqs:
-            done.write("\t".join(f'{fastqs}.gz') + "\n")
+            done.write("\t".join(fastqs) + "\n")
     return((region_fastqs, all_fastqs))
 
 def remap(args, region_fastqs, all_fastqs):
