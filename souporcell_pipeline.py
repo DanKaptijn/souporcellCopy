@@ -236,7 +236,7 @@ def remap(args, region_fastqs, all_fastqs):
         output = args.out_dir + "/souporcell_minimap_tmp_" + str(index) + ".sam"
         minimap_tmp_files.append(output)
         ### changed to gzip.open DK
-        with gzip.open(args.out_dir + "/tmp.fq.gz", 'w') as tmpfq:
+        with gzip.open(args.out_dir + "/tmp.fq.gz", 'wt') as tmpfq:
             subprocess.check_call(['cat'] + region_fastqs[index], stdout = tmpfq)
         with open(output, 'w') as samfile:
             with open(args.out_dir + "/minimap.err",'w') as minierr:
