@@ -2,7 +2,7 @@
 
 ####
 # lines changed:
-# 220, 245, 270
+# 220, 245, 258, 264, 268, 270
 # DK
 ###
 
@@ -255,17 +255,17 @@ def remap(args, region_fastqs, all_fastqs):
                         fasta_base = fasta_base[:-6]
                     else:
                         assert False, "fasta file not right extension .fa or .fasta"
-                    subprocess.check_call(["hisat2", "-p", str(args.threads), "-q", args.out_dir + "/tmp.fq", "-x", 
+                    subprocess.check_call(["hisat2", "-p", str(args.threads), "-q", args.out_dir + "/tmp.fq.gz", "-x",  ### added ".gz" DK
                     fasta_base,
                     "-S", output], stderr =minierr)
                 else:
                     cmd = ["minimap2", "-ax", "splice", "-t", str(args.threads), "-G50k", "-k", "21",
                         "-w", "11", "--sr", "-A2", "-B8", "-O12,32", "-E2,1", "-r200", "-p.5", "-N20", "-f1000,5000",
-                        "-n2", "-m20", "-s40", "-g2000", "-2K50m", "--secondary=no", args.fasta, args.out_dir + "/tmp.fq"]
+                        "-n2", "-m20", "-s40", "-g2000", "-2K50m", "--secondary=no", args.fasta, args.out_dir + "/tmp.fq.gz"] ### added ".gz" DK
                     minierr.write(" ".join(cmd)+"\n")
                     subprocess.check_call(["minimap2", "-ax", "splice", "-t", str(args.threads), "-G50k", "-k", "21", 
                         "-w", "11", "--sr", "-A2", "-B8", "-O12,32", "-E2,1", "-r200", "-p.5", "-N20", "-f1000,5000",
-                        "-n2", "-m20", "-s40", "-g2000", "-2K50m", "--secondary=no", args.fasta, args.out_dir + "/tmp.fq"], 
+                        "-n2", "-m20", "-s40", "-g2000", "-2K50m", "--secondary=no", args.fasta, args.out_dir + "/tmp.fq.gz"],  ### added ".gz" DK
                         stdout = samfile, stderr = minierr)
         subprocess.check_call(['rm', args.out_dir + "/tmp.fq.gz"]) ### added ".gz" DK
 
