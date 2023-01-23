@@ -1,5 +1,11 @@
 #!/usr/bin/env python
 
+####
+# lines changed:
+# 220, 245, 270
+# DK
+###
+
 import argparse
 
 parser = argparse.ArgumentParser(
@@ -261,7 +267,7 @@ def remap(args, region_fastqs, all_fastqs):
                         "-w", "11", "--sr", "-A2", "-B8", "-O12,32", "-E2,1", "-r200", "-p.5", "-N20", "-f1000,5000",
                         "-n2", "-m20", "-s40", "-g2000", "-2K50m", "--secondary=no", args.fasta, args.out_dir + "/tmp.fq"], 
                         stdout = samfile, stderr = minierr)
-        subprocess.check_call(['rm', args.out_dir + "/tmp.fq"])
+        subprocess.check_call(['rm', args.out_dir + "/tmp.fq.gz"]) ### added ".gz" DK
 
     with open(args.out_dir + '/remapping.done', 'w') as done:
         for fn in minimap_tmp_files:
